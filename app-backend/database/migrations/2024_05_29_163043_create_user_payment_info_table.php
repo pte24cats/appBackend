@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('user_payment_info', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->int('credit_card_number');
+            $table->integer('credit_card_number');
             // $table->timestamp('credit_card_expiration_date');  //imo I think this is a better approach.
-            $table->int('expiry_month');
-            $table->int('expiry_year');
+            $table->integer('expiry_month');
+            $table->integer('expiry_year');
             $table->timestamps();
         });
     }
