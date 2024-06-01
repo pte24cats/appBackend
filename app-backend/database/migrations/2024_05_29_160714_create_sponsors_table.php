@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('cat_id')->constrained();
-            $table->int('payment_amount'); // Are you sure about this? This was already in the transactions table.
+            $table->integer('payment_amount'); // Are you sure about this? This was already in the transactions table.
             $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }
