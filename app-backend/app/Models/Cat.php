@@ -26,10 +26,39 @@ class Cat extends Model
     
     /*----------------------Functions----------------------*/
 
+public function createCat($cat_name, $cat_color, $cat_description, $good_cat_status)
+{
+    $cat = new Cat;
+    $cat->cat_name = $cat_name;
+    $cat->cat_color = $cat_color;
+    $cat->cat_description = $cat_description;
+    $cat->good_cat_status = $good_cat_status;
+    $cat->save();
+}
+
+public function updateCat($cat_id, $cat_name, $cat_color, $cat_description, $good_cat_status)
+{
+    $cat = Cat::find($cat_id);
+    $cat->cat_name = $cat_name;
+    $cat->cat_color = $cat_color;
+    $cat->cat_description = $cat_description;
+    $cat->good_cat_status = $good_cat_status;
+    $cat->save();
+}
+
+public function deleteCat($cat_id)
+{
+    $cat = Cat::find($cat_id);
+    $cat->delete();
+}
+
+
     // Get the adoptions for the cat.
 
     public function adoptions()
     {
         return $this->hasMany(Adoption::class);
     }
+
+
 }
