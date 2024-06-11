@@ -7,13 +7,18 @@ use App\Models\Cat;
 
 class CatController extends Controller
 {
-
+    public function index()
+    {
+        $cats = Cat::all();
+        return response()->json($cats);
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('cats.create');
+        $cat = Cat::create($request->all());
+        return response()->json($cat);
     }
 
     /**
@@ -29,14 +34,6 @@ class CatController extends Controller
      * Display the specified resource.
      */
     public function show(Cat $cat)
-    {
-        return response()->json($cat);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cat $cat)
     {
         return response()->json($cat);
     }

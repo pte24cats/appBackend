@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class SponsorController extends Controller
@@ -11,15 +11,8 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $sponsors = Sponsor::all();
+        return response()->json($sponsors);
     }
 
     /**
@@ -27,7 +20,8 @@ class SponsorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sponsor = Sponsor::create($request->all());
+        return response()->json($sponsor);
     }
 
     /**
@@ -35,15 +29,8 @@ class SponsorController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $sponsor = Sponsor::findOrFail($id);
+        return response()->json($sponsor);
     }
 
     /**
@@ -51,7 +38,9 @@ class SponsorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $sponsor = Sponsor::findOrFail($id);
+        $sponsor->update($request->all());
+        return response()->json($sponsor);
     }
 
     /**
@@ -59,6 +48,13 @@ class SponsorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sponsor = Sponsor::find($id);
+
+        if ($sponsor) {
+            $sponsor->delete();
+            return response()->json(['message' => 'Sponsor deleted successfully']);
+        } else {
+            return response()->json(['message' => 'Sponsor not found']);
+        }
     }
 }

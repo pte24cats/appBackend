@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Adoption;
+use App\Models\Sponsor;
 
 class AdoptionController extends Controller
 {
@@ -11,15 +13,8 @@ class AdoptionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $adoptions = Adoption::all();
+        return response()->json($adoptions);
     }
 
     /**
@@ -27,38 +22,41 @@ class AdoptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $adoption = Adoption::create($request->all());
+        return response()->json($adoption);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $adoption = Adoption::findOrFail($id);
+        return response()->json($adoption);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $adoption = Adoption::findOrFail($id);
+        $adoption->update($request->all());
+        return response()->json($adoption);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $adoption = Adoption::find($id);
+
+        if ($adoption) {
+            $adoption->delete();
+            return response()->json(['message' => 'Adoption deleted successfully']);
+        } else {
+            return response()->json(['message' => 'Adoption not found']);
+        }
     }
 }
