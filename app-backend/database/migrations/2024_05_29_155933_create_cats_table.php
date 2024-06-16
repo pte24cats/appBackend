@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('cat_name')->unique();
             $table->string('cat_color');
             $table->text('cat_description');
-            // $table->boolean('good_boy_status')->default(true); 
-            $table->boolean('good_cat_status')->default(false);   // cats can be not boys :(
+            $table->boolean('good_cat_status')->default(false);
+            $table->binary('cat_picture')->nullable(); // Store the picture as binary data
+            $table->integer('cat_age'); 
+            $table->string('cat_gender'); 
+            $table->string('cat_breed')->nullable();
             $table->timestamps();
         });
     }
