@@ -21,8 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
-        'firstName',
-        'lastName',
+        'name',
         'email',
         'password',
         'address',
@@ -36,7 +35,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'admin_status',
         'register_date',
 
     ];
@@ -54,25 +52,12 @@ class User extends Authenticatable
 
     /*----------------------Functions----------------------*/
 
-    // Get the full name of the user.
-    public function getFullName()
-{
-    return $this->firstName . ' ' . $this->lastName;
-}
-
-    // Make the user an admin.
-    public function AdminUser($adminStatusBool)
-    {
-        $this->admin_status = $adminStatusBool;
-        $this->save();
-    }
-
     // Modify the user.           (Do we need both a ModifyUser and All the rest of the functions?)
-        public function ModifyUser($user_id, $firstName, $lastName, $password, $email, $address, $phone)
+        public function ModifyUser($user_id, $username ,$name, $password, $email, $address, $phone)
     {
         $user = User::find($user_id);
-        $user->firstName = $firstName;
-        $user->lastName = $lastName;
+        $user->username = $username;
+        $user->name = $name;
         $user->password = Hash::make($password);
         $user->email = $email;
         $user->address = $address;
@@ -94,6 +79,17 @@ class User extends Authenticatable
             $user->save();
         }
     }
+
+
+    public function ChangeUsername($user_id, $username, $new_username)
+    {
+        $user = User::find($user_id);
+        if ($user->username == $username) {
+            $user->username = $new_username;
+            $user->save();
+        }
+    }
+    
     // Change the email of the user.
     public function ChangeEmail($user_id, $email, $new_email)
     {
