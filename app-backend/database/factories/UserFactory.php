@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,10 +23,14 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'username' => fake()->unique()->userName(),
+            'firstName' => fake()->firstName(),
+            'lastName' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('password'), // Default password, hashed
+            'address' => fake()->address(),
+            'phone' => fake()->unique()->phoneNumber(),
+            'register_date' => now(), // Assuming 'now()' is acceptable for seeding purposes
             'remember_token' => Str::random(10),
         ];
     }

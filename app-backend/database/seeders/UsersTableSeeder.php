@@ -23,7 +23,6 @@ class UsersTableSeeder extends Seeder
             'address' => '123st',
             'phone' => '1234567890',
             'register_date' => now(),
-            'admin_status' => true,
         ]);
 
         DB::table('users')->insert([
@@ -35,7 +34,6 @@ class UsersTableSeeder extends Seeder
             'address' => '123st',
             'phone' => '1234567891',
             'register_date' => now(),
-            'admin_status' => false,
         ]);
     }
 }
