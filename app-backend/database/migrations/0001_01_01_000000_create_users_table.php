@@ -20,8 +20,7 @@ return new class extends Migration // Do we need to redefine the Anonymous class
             $table->string('email')->unique();
             $table->string('address');
             $table->string('phone')->unique();
-            $table->timestamp('register_date')->nullable();     // incase user is an admin, they might not have a registration date.
-            $table->boolean('admin_status')->default(false);
+            $table->timestamp('register_date');    
             $table->rememberToken();
             $table->timestamps();
         });
