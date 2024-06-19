@@ -36,4 +36,9 @@ class AuthenticatedSessionController extends Controller
 
         return response()->json(['message' => 'Logged out'], 200);
     }
+    public function create()
+    {
+        return view('login');
+    
+    }
 }

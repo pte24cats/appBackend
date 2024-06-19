@@ -54,16 +54,6 @@ class CatController extends Controller
     {
         $cat->delete();
         return response()->json(['message' => 'Cat deleted :(']);
-=======
-    /**
-     * Display a listing of the cats.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $cats = Cat::all();
-        return view('cats.index', compact('cats'));
     }
 
     /**

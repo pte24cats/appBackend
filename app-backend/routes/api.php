@@ -9,9 +9,16 @@ use App\Http\Controllers\CatController;
 
 /*----------------------Users----------------------*/
 
-//Login route
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
+
+
+//Login route
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+->middleware('guest');
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
 //Register route
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
@@ -22,7 +29,8 @@ Route::put('/user/{user}', [RegisteredUserController::class, 'update']);
 Route::delete('/user/{user}', [RegisteredUserController::class, 'destroy']);
 
 //Logout route
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+->middleware('guest');
 
 
 //Middleware
@@ -45,6 +53,3 @@ Route::put('/cats/{cat}', [CatController::class, 'update']);
 
 //Delete cat route
 Route::delete('/cats/{cat}', [CatController::class, 'destroy']);
-
-
-
